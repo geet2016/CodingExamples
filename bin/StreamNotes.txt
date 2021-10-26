@@ -1,0 +1,131 @@
+/*	The Java Stream API is not related to the Java InputStream and
+		Java OutputStream of Java IO. The InputStream and OutputStream are
+		related to streams of bytes. 
+		The Java Stream API is for processing streams of objects
+		(collections of objects) - not bytes.
+		The Java Stream interface contains a static method called of() which
+		 can be used to create a Stream from one or more objects.
+		*/
+		
+		/*Many non-terminal Stream operations can take a Java Lambda Expression as parameter.
+		This lambda expression implements a Java functional interface that fits the given 
+		non-terminal operation. For instance, the Function or Predicate interface.
+		The parameter of the non-terminal operation method parameter is typically a 
+		functional interface - which is why it can also be implemented by a Java lambda expression.*/
+		
+		/*	filter()
+		The Java Stream filter() can be used to filter out elements from a Java Stream. 
+		The filter method takes a Predicate which is called for each element in the stream. 
+		If the element is to be included in the resulting Stream, the Predicate should return true. 
+		If the element should not be included, the Predicate should return false.*/
+		
+		//flatMap()
+		//flatMap() can be used where we have to flatten or transform out the string, as we cannot flatten our string using map().
+		/*The Java Stream flatMap() methods maps a single element into multiple elements. 
+		The idea is that you "flatten" each element from a complex structure consisting of
+		multiple internal elements, to a "flat" stream consisting only of these internal elements.*/
+		
+	/*	This Java Stream flatMap() example first creates a List with 3 strings containing book titles.
+		Then a Stream for the List is obtained, and flatMap() called.
+
+		The flatMap() operation called on the Stream has to return another Stream representing 
+				the flat mapped elements. In the example above, each original string is split into words,
+				turned into a List, and the stream obtained and returned from that List.*/
+		
+/*        map()	                                           flatMap()
+The function passed to map() operation 
+returns a single value for a single input.	The function you pass to flatmap() operation returns an arbitrary
+                                            number of values as the output.
+                                            
+One-to-one mapping occurs in map().       	One too many mapping occurs in flatMap().
+Only perform the mapping.                	Perform mapping as well as flattening.
+Produce a stream of value.                 	Produce a stream of stream value.
+map() is used only for transformation.	    flatMap() is used both for transformation and mapping.*/
+
+
+
+/*distinct()
+	The Java Stream distinct() method is a non-terminal operation that returns
+	a new Stream which will only contain the distinct elements 
+    Only the first occurrence of this element will be included in the Stream returned by distinct() */
+    
+    
+    limit()
+The Java Stream limit() method can limit the number of elements in a stream to a number given to the
+ limit() method as parameter. The limit() method returns a new Stream which will at most contain the
+  given number of elements.
+  
+  peek()
+The Java Stream peek() method is a non-terminal operation that takes a Consumer (java.util.function.Consumer)
+ as parameter. 
+ The Consumer will get called for each element in the stream. 
+ The peek() method returns a new Stream which contains all the elements in the original stream.
+
+The purpose of the peek() method is, as the method says, to peek at the elements in the stream,
+ not to transform them. Keep in mind that the peek method does not start the internal iteration
+  of the elements in the stream. You need to call a terminal operation for that. 
+  
+  Terminal Operations
+The terminal operations of the Java Stream interface typicall return a single value.
+ Once the terminal operation is invoked on a Stream, the iteration of the Stream and any of the chained streams
+  will get started. Once the iteration is done, the result of the terminal operation is returned.
+
+A terminal operation typically does not return a new Stream instance. Thus, once you call a terminal operation
+ on a stream, the chaining of Stream instances from non-terminal operation ends. 
+ 
+ anyMatch()
+The Java Stream anyMatch() method is a terminal operation that takes a single Predicate as parameter,
+ starts the internal iteration of the Stream, and applies the Predicate parameter to each element. 
+ If the Predicate returns true for any of the elements, the anyMatch() method returns true.
+  If no elements match the Predicate, anyMatch() will return false. 
+  
+The Java Stream allMatch() method is a terminal operation that takes a single Predicate as parameter,
+ starts the internal iteration of elements in the Stream, and applies the Predicate parameter to each element.
+  If the Predicate returns true for all elements in the Stream, the allMatch() will return true. 
+  If not all elements match the Predicate, the allMatch() method returns false.
+  
+  The Java Stream noneMatch() method is a terminal operation that will iterate the elements in the stream
+   and return true or false, depending on whether no elements in the stream matches the Predicate passed to
+    noneMatch() as parameter. The noneMatch() method will return true if no elements are matched by the Predicate,
+     and false if one or more elements are matched.
+     
+collect()
+The Java Stream collect() method is a terminal operation that starts the internal iteration of elements,
+ and collects the elements in the stream in a collection or object of some kind.
+ The collect() method takes a Collector (java.util.stream.Collector) as parameter.
+  Implementing a Collector requires some study of the Collector interface. Luckily, the Java class
+   java.util.stream.Collectors contains a set of pre-implemented Collector implementations you can use,
+    for the most common operations. In the example above, it was the Collector implementation returned by
+     Collectors.toList() that was used. This Collector simply collects all elements in the stream in a
+      standard Java List
+
+findAny()
+The Java Stream findAny() method can find a single element from the Stream. The element found can be from 
+anywhere in the Stream. There is no guarantee about from where in the stream the element is taken.
+
+Notice how the findAny() method returns an Optional. The Stream could be empty - so no element could be
+ returned. You can check if an element was found via the Optional isPresent() method.
+ 
+ forEach()
+The Java Stream forEach() method is a terminal operation which starts the internal iteration of the 
+elements in the Stream, and applies a Consumer (java.util.function.Consumer) to each element in the Stream. 
+The forEach() method returns void
+
+min()
+The Java Stream min() method is a terminal operation that returns the smallest element in the Stream. 
+Which element is the smallest is determined by the Comparator implementation you pass to the min() method.
+
+The Java Stream max() method is a terminal operation that returns the largest element in the Stream.
+ Which element is the largest is determined by the Comparator implementation you pass to the max() method.
+ 
+toArray()
+The Java Stream toArray() method is a terminal operation that starts the internal iteration of the elements
+ in the stream, and returns an array of Object containing all the elements. 
+ 
+
+ The Java Stream reduce() method is a terminal operation that can reduce all elements in the stream to a 
+ single element. 
+ 
+ The Java Stream interface contains a static method called concat() which can concatenate two streams into one.
+  The result is a new Stream which contains all of the elements from the first stream, followed by all of the 
+  elements from the second stream.
